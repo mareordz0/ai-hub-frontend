@@ -1,3 +1,4 @@
+// Sección principal de la página de inicio
 export function Hero() {
   return (
     <section className="h-screen flex items-center justify-center bg-[#025273]">

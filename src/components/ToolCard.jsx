@@ -1,3 +1,4 @@
+// Tarjeta individual de una herramienta IA
 export function ToolCard({ tool }) {
   return (
     <div className="bg-[#c8d3d9] p-4 rounded">

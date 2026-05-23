@@ -1,3 +1,4 @@
+// Botones para filtrar herramientas IA por categoría
 export function CategoryButtons({ categories, selected, onSelect }) {
   return (
     <div className="flex space-x-2">

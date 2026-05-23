@@ -1,3 +1,4 @@
+// Componente de navegación superior
 export function Navbar() {
   return (
     <nav className="px-4 py-2 flex justify-between items-center bg-[#112e40] text-white">
