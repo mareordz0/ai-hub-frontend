@@ -1,4 +1,6 @@
 // Componente de navegación superior
+import { Link } from 'react-router-dom';
+
 export function Navbar() {
   return (
     <nav className="px-4 py-2 flex justify-between items-center bg-[#112e40] text-white">

@@ -1,8 +1,8 @@
 // Contenedor del grid de tarjetas de herramientas
 // Maneja la carga de herramientas con filtro por categoría y paginación
 import { useState, useEffect } from 'react';
-import { getTools } from '../api/toolsService';
-import ToolCard from './ToolCard';
+import { getTools } from "../services/toolsService";
+import { ToolCard } from "./ToolCard";
 
 export function ToolGrid({ selectedCategory }) {
   const [tools, setTools] = useState([]);
