@@ -24,28 +24,41 @@ export function Home() {
   return (
     <div style={{ backgroundColor: '#c8d3d9', minHeight: '100vh' }}>
       <Navbar />
-      <Hero />
 
-      {/* Sección de herramientas */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 style={{ color: '#112e40' }}
-          className="text-3xl font-bold text-center mb-8">
-          Explora las herramientas
-        </h2>
-        <CategoryButtons
-          categories={categories.map(c => c.name)}
-          selected={selectedCategory?.name}
-          onSelect={(name) => {
-            const found = categories.find(c => c.name === name);
-            setSelectedCategory(found?.id ? found : null);
-          }}
-        />
-        <ToolGrid selectedCategory={selectedCategory?.id} />
-      </section>
+      {/* Espacio para el navbar fijo */}
+      <div style={{ paddingTop: '58px' }}>
+        <Hero />
 
-      <Features />
-      <Comparison />
-      <Footer />
+        {/* Sección de herramientas */}
+        <section style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '60px 24px'
+        }}>
+          <h2 style={{
+            color: '#112e40',
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '32px'
+          }}>
+            Explora las herramientas
+          </h2>
+          <CategoryButtons
+            categories={categories.map(c => c.name)}
+            selected={selectedCategory?.name}
+            onSelect={(name) => {
+              const found = categories.find(c => c.name === name);
+              setSelectedCategory(found?.id ? found : null);
+            }}
+          />
+          <ToolGrid selectedCategory={selectedCategory?.id} />
+        </section>
+
+        <Features />
+        <Comparison />
+        <Footer />
+      </div>
     </div>
   );
 }

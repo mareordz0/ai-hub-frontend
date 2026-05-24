@@ -2,8 +2,12 @@
 const plans = [
   {
     name: 'Básico',
-    color: '#112e40',
+    backgroundColor: '#112e40',
+    titleColor: '#41d1f3',
     textColor: '#c8d3d9',
+    checkColor: '#41d1f3',
+    xColor: '#ff6b6b',
+    featured: false,
     features: [
       { label: 'Ver herramientas', available: true },
       { label: 'Filtrar por categoría', available: true },
@@ -14,8 +18,11 @@ const plans = [
   },
   {
     name: 'Pro',
-    color: '#41d1f3',
+    backgroundColor: '#41d1f3',
+    titleColor: '#112e40',
     textColor: '#112e40',
+    checkColor: '#112e40',
+    xColor: '#025273',
     featured: true,
     features: [
       { label: 'Ver herramientas', available: true },
@@ -26,9 +33,13 @@ const plans = [
     ]
   },
   {
-    name: 'Admin',
-    color: '#025273',
+    name: 'Admin Ai',
+    backgroundColor: '#025273',
+    titleColor: '#41d1f3',
     textColor: '#c8d3d9',
+    checkColor: '#41d1f3',
+    xColor: '#ff6b6b',
+    featured: false,
     features: [
       { label: 'Ver herramientas', available: true },
       { label: 'Filtrar por categoría', available: true },
@@ -41,30 +52,73 @@ const plans = [
 
 export function Comparison() {
   return (
-    <section style={{ backgroundColor: '#c8d3d9' }} className="py-16 px-6">
-      <h2 style={{ color: '#112e40' }}
-        className="text-2xl font-bold text-center mb-10">
+    <section style={{ backgroundColor: '#c8d3d9', padding: '64px 24px' }}>
+      <h2 style={{
+        color: '#112e40', fontSize: '28px', fontWeight: 'bold',
+        textAlign: 'center', marginBottom: '48px'
+      }}>
         Planes y accesos
       </h2>
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '20px',
+        flexWrap: 'wrap',
+        maxWidth: '900px',
+        margin: '0 auto'
+      }}>
         {plans.map(plan => (
-          <div key={plan.name}
-            style={{ backgroundColor: plan.color }}
-            className={`rounded-xl p-6 shadow-md ${plan.featured ? 'scale-105' : ''}`}>
-            <h3 style={{ color: plan.textColor }}
-              className="text-xl font-bold text-center mb-6">
+          <div key={plan.name} style={{
+            backgroundColor: plan.backgroundColor,
+            borderRadius: '16px',
+            padding: '32px 28px',
+            width: plan.featured ? '260px' : '230px',
+            transform: plan.featured ? 'scale(1.05)' : 'scale(1)',
+            boxShadow: plan.featured
+              ? '0 8px 30px rgba(65,209,243,0.3)'
+              : '0 4px 12px rgba(0,0,0,0.2)',
+            transition: 'transform 0.2s'
+          }}>
+            {/* Nombre del plan */}
+            <h3 style={{
+              color: plan.titleColor,
+              fontSize: '20px',
+              fontWeight: 'bold',
+              textAlign: 'center',
+              marginBottom: '24px',
+              paddingBottom: '16px',
+              borderBottom: `1px solid ${plan.featured ? '#112e40' : '#41d1f3'}`
+            }}>
               {plan.name}
             </h3>
-            <ul className="flex flex-col gap-3">
+
+            {/* Features */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               {plan.features.map(f => (
-                <li key={f.label}
-                  style={{ color: plan.textColor }}
-                  className="flex items-center gap-2 text-sm">
-                  <span>{f.available ? '✓' : '✗'}</span>
-                  {f.label}
-                </li>
+                <div key={f.label} style={{
+                  display: 'flex', alignItems: 'center', gap: '10px'
+                }}>
+                  <span style={{
+                    color: f.available ? plan.checkColor : plan.xColor,
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    flexShrink: 0,
+                    width: '16px'
+                  }}>
+                    {f.available ? '✓' : '✗'}
+                  </span>
+                  <span style={{
+                    color: plan.textColor,
+                    fontSize: '13px',
+                    opacity: f.available ? 1 : 0.6
+                  }}>
+                    {f.label}
+                  </span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>

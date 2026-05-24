@@ -12,31 +12,62 @@ export function Navbar() {
   };
 
   return (
-    <nav style={{ backgroundColor: '#112e40' }}
-      className="px-6 py-4 flex justify-between items-center shadow-lg">
-      <Link to="/home">
-        <span style={{ color: '#41d1f3' }} className="text-2xl font-bold tracking-wide">
-          Herramientas de IA
-        </span>
-      </Link>
-      <div className="flex items-center gap-6">
-        <Link to="/home" style={{ color: '#c8d3d9' }}
-          className="text-base hover:text-white transition">
-          Inicio
+    <nav style={{
+      backgroundColor: '#112e40',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 1000,
+      boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
+    }}>
+      <div style={{
+        maxWidth: '1280px',
+        margin: '0 auto',
+        padding: '12px 24px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        {/* Logo centrado */}
+        <div style={{ flex: 1 }} />
+        <Link to="/home" style={{ textDecoration: 'none', flex: 1, textAlign: 'center' }}>
+          <span style={{ color: '#41d1f3', fontSize: '18px', fontWeight: 'bold' }}>
+            Herramientas de IA
+          </span>
         </Link>
-        {token ? (
-          <button onClick={handleLogout}
-            style={{ backgroundColor: '#41d1f3', color: '#112e40' }}
-            className="text-sm px-5 py-2 rounded-lg font-semibold hover:opacity-90 transition">
-            Cerrar sesión
-          </button>
-        ) : (
-          <Link to="/login"
-            style={{ backgroundColor: '#41d1f3', color: '#112e40' }}
-            className="text-sm px-5 py-2 rounded-lg font-semibold hover:opacity-90 transition">
-            Iniciar sesión
+
+        {/* Links a la derecha */}
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          gap: '20px'
+        }}>
+          <Link to="/home" style={{ color: '#c8d3d9', textDecoration: 'none', fontSize: '14px' }}>
+            Inicio
           </Link>
-        )}
+          {token ? (
+            <button onClick={handleLogout} style={{
+              backgroundColor: '#41d1f3', color: '#112e40',
+              border: 'none', padding: '7px 16px',
+              borderRadius: '8px', fontWeight: '600',
+              fontSize: '13px', cursor: 'pointer'
+            }}>
+              Cerrar sesión
+            </button>
+          ) : (
+            <Link to="/login" style={{
+              backgroundColor: '#41d1f3', color: '#112e40',
+              padding: '7px 16px', borderRadius: '8px',
+              fontWeight: '600', fontSize: '13px',
+              textDecoration: 'none'
+            }}>
+              Iniciar sesión
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );
