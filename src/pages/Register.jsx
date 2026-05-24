@@ -1,26 +1,30 @@
-// Formulario de inicio de sesión
-// Consume /api/auth/login y guarda el JWT en localStorage
+// Página de registro de usuario
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../services/authService';
+import { register } from '../services/authService';
 
-export function Login() {
+export function Register() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirm) {
+      setError('Las contraseñas no coinciden.');
+      return;
+    }
     setLoading(true);
     setError(null);
-
     try {
-      await login({ username: email, password });
-      navigate('/home');
+      await register({ name, email, password });
+      navigate('/login');
     } catch {
-      setError('Email o contraseña incorrectos.');
+      setError('No se pudo registrar. Intenta con otro correo.');
     } finally {
       setLoading(false);
     }
@@ -38,7 +42,7 @@ export function Login() {
             Herramientas de IA
           </h1>
           <p style={{ color: '#c8d3d9' }} className="text-sm">
-            Inicia sesión para continuar
+            Crea tu cuenta para comenzar
           </p>
         </div>
 
@@ -52,6 +56,19 @@ export function Login() {
 
         {/* Formulario */}
         <div className="flex flex-col gap-4">
+          <div>
+            <label style={{ color: '#c8d3d9' }} className="text-sm mb-1 block">
+              Nombre completo
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              placeholder="Tu nombre"
+              style={{ backgroundColor: '#c8d3d9', color: '#112e40' }}
+              className="w-full px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-[#41d1f3]"
+            />
+          </div>
           <div>
             <label style={{ color: '#c8d3d9' }} className="text-sm mb-1 block">
               Correo electrónico
@@ -73,6 +90,19 @@ export function Login() {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
+              placeholder="Mínimo 8 caracteres"
+              style={{ backgroundColor: '#c8d3d9', color: '#112e40' }}
+              className="w-full px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-[#41d1f3]"
+            />
+          </div>
+          <div>
+            <label style={{ color: '#c8d3d9' }} className="text-sm mb-1 block">
+              Confirmar contraseña
+            </label>
+            <input
+              type="password"
+              value={confirm}
+              onChange={e => setConfirm(e.target.value)}
               placeholder="••••••••"
               style={{ backgroundColor: '#c8d3d9', color: '#112e40' }}
               className="w-full px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-[#41d1f3]"
@@ -84,16 +114,16 @@ export function Login() {
             disabled={loading}
             style={{ backgroundColor: '#41d1f3', color: '#112e40' }}
             className="w-full py-2 rounded-lg font-bold mt-2 hover:opacity-90 disabled:opacity-50 transition">
-            {loading ? 'Iniciando sesión...' : 'Entrar'}
+            {loading ? 'Registrando...' : 'Crear cuenta'}
           </button>
         </div>
 
-        {/* Link a registro */}
+        {/* Link a login */}
         <p style={{ color: '#c8d3d9' }} className="text-sm text-center mt-6">
-          ¿No tienes cuenta?{' '}
-          <Link to="/Register" style={{ color: '#41d1f3' }}
+          ¿Ya tienes cuenta?{' '}
+          <Link to="/Login" style={{ color: '#41d1f3' }}
             className="font-semibold hover:underline">
-            Regístrate aquí
+            Inicia sesión
           </Link>
         </p>
       </div>

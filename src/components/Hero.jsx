@@ -1,11 +1,20 @@
 // Sección principal de la página de inicio
 export function Hero() {
   return (
-    <section className="h-screen flex items-center justify-center bg-[#025273]">
-      <div className="text-center text-white">
-        <h1 className="text-4xl font-bold">Bienvenido a AI Hub</h1>
-        <p className="mt-4">Herramientas IA destacadas en tu industria.</p>
-        <button className="mt-6 px-6 py-2 bg-[#41d1f3] hover:bg-[#3ce0f2] text-black">
+    <section style={{ backgroundColor: '#025273' }}
+      className="py-20 px-6 flex items-center justify-center">
+      <div className="max-w-2xl text-center">
+        <h1 style={{ color: '#41d1f3' }}
+          className="text-4xl font-bold mb-4 leading-tight">
+          Descubre las mejores<br />herramientas de IA
+        </h1>
+        <p style={{ color: '#c8d3d9' }} className="text-lg mb-8">
+          Encuentra y compara herramientas de inteligencia artificial
+          organizadas por categoría para tu industria.
+        </p>
+        <button
+          style={{ backgroundColor: '#41d1f3', color: '#112e40' }}
+          className="px-8 py-3 rounded-lg font-bold text-lg hover:opacity-90 transition">
           Empezar
         </button>
       </div>
