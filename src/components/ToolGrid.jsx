@@ -1,8 +1,8 @@
 // Contenedor del grid de tarjetas de herramientas
 // Maneja la carga de herramientas con filtro por categoría y paginación
 import { useState, useEffect } from 'react';
-import { getTools } from "../services/toolsService";
-import { ToolCard } from "./ToolCard";
+import { getTools } from '../services/toolsService';
+import { ToolCard } from './ToolCard';
 
 export function ToolGrid({ selectedCategory }) {
   const [tools, setTools] = useState([]);
@@ -10,12 +10,9 @@ export function ToolGrid({ selectedCategory }) {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
-  const limit = 10;
+  const limit = 9;
 
-  useEffect(() => {
-    // Reinicia a página 1 cuando cambia la categoría
-    setPage(1);
-  }, [selectedCategory]);
+  useEffect(() => { setPage(1); }, [selectedCategory]);
 
   useEffect(() => {
     setLoading(true);
@@ -25,39 +22,70 @@ export function ToolGrid({ selectedCategory }) {
         setTotal(res.data.total);
         setLoading(false);
       })
-      .catch(err => {
+      .catch(() => {
         setError('Error al cargar las herramientas.');
         setLoading(false);
       });
   }, [selectedCategory, page]);
 
-  if (loading) return <p>Cargando herramientas...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return (
+    <div style={{ textAlign: 'center', padding: '60px 0' }}>
+      <p style={{ color: '#025273', fontSize: '18px' }}>Cargando herramientas...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div style={{ textAlign: 'center', padding: '60px 0' }}>
+      <p style={{ color: 'red' }}>{error}</p>
+    </div>
+  );
+
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Grid con estilos inline */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '24px',
+        width: '100%'
+      }}>
         {tools.map(tool => (
           <ToolCard key={tool.id} tool={tool} />
         ))}
       </div>
 
       {/* Paginación */}
-      <div className="flex justify-center gap-4 mt-6">
-        <button
-          onClick={() => setPage(p => p - 1)}
-          disabled={page === 1}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50">
-          Anterior
-        </button>
-        <span>Página {page} de {Math.ceil(total / limit)}</span>
-        <button
-          onClick={() => setPage(p => p + 1)}
-          disabled={page >= Math.ceil(total / limit)}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50">
-          Siguiente
-        </button>
-      </div>
+      {totalPages > 1 && (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', marginTop: '40px' }}>
+          <button
+            onClick={() => setPage(p => p - 1)}
+            disabled={page === 1}
+            style={{
+              backgroundColor: '#112e40', color: '#c8d3d9',
+              border: '1px solid #41d1f3', padding: '8px 20px',
+              borderRadius: '8px', fontWeight: '600',
+              opacity: page === 1 ? 0.4 : 1, cursor: page === 1 ? 'not-allowed' : 'pointer'
+            }}>
+            ← Anterior
+          </button>
+          <span style={{ color: '#112e40', fontWeight: '500' }}>
+            Página {page} de {totalPages}
+          </span>
+          <button
+            onClick={() => setPage(p => p + 1)}
+            disabled={page >= totalPages}
+            style={{
+              backgroundColor: '#112e40', color: '#c8d3d9',
+              border: '1px solid #41d1f3', padding: '8px 20px',
+              borderRadius: '8px', fontWeight: '600',
+              opacity: page >= totalPages ? 0.4 : 1, cursor: page >= totalPages ? 'not-allowed' : 'pointer'
+            }}>
+            Siguiente →
+          </button>
+        </div>
+      )}
     </div>
   );
 }
