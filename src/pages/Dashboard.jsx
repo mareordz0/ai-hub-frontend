@@ -9,58 +9,115 @@ export function Dashboard() {
   const role = localStorage.getItem('role');
 
   useEffect(() => {
-    if (role !== 'admin') {
-      navigate('/home');
-    }
+    if (role !== 'admin') navigate('/home');
   }, [role, navigate]);
+
+  if (role !== 'admin') return null;
 
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
-  if (role !== 'admin') return null;
-
   return (
-    <div style={{ backgroundColor: '#c8d3d9', minHeight: '100vh' }}>
-      <div style={{ backgroundColor: '#112e40' }} className="px-6 py-4 flex justify-between items-center">
-        <h1 style={{ color: '#41d1f3' }} className="text-xl font-bold">
-          Panel de Administración
+    <div style={{ backgroundColor: '#112e40', minHeight: '100vh', fontFamily: 'Arial, sans-serif' }}>
+
+      {/* Header */}
+      <div style={{
+        backgroundColor: '#0a1f2e',
+        padding: '20px 32px',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        borderBottom: '1px solid #1a3a50'
+      }}>
+        <h1 style={{ color: '#41d1f3', fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
+          🤖 Panel de Administración
         </h1>
-        <div className="flex items-center gap-4">
-          <Link to="/home" style={{ color: '#c8d3d9' }} className="text-sm hover:text-white transition">
-            Ver sitio
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <Link to="/home" style={{
+            color: '#c8d3d9', textDecoration: 'none', fontSize: '14px'
+          }}>
+            ← Ver sitio
           </Link>
-          <button onClick={handleLogout}
-            style={{ backgroundColor: '#41d1f3', color: '#112e40' }}
-            className="text-sm px-4 py-1.5 rounded-lg font-semibold hover:opacity-90 transition">
+          <button onClick={handleLogout} style={{
+            backgroundColor: '#41d1f3', color: '#112e40',
+            border: 'none', padding: '8px 16px',
+            borderRadius: '8px', fontWeight: '600',
+            fontSize: '13px', cursor: 'pointer'
+          }}>
             Cerrar sesión
           </button>
         </div>
       </div>
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <p style={{ color: '#112e40' }} className="text-lg font-semibold mb-8">
-          ¿Qué deseas administrar?
+
+      {/* Contenido */}
+      <div style={{
+        maxWidth: '800px', margin: '60px auto',
+        padding: '0 24px'
+      }}>
+        <p style={{ color: '#7a9aaa', fontSize: '14px', marginBottom: '32px' }}>
+          Selecciona qué deseas administrar
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link to="/dashboard/categories">
-            <div style={{ backgroundColor: '#112e40' }}
-              className="rounded-xl p-8 shadow-md hover:border-[#41d1f3] border border-transparent transition cursor-pointer">
-              <h2 style={{ color: '#41d1f3' }} className="text-xl font-bold mb-2">Categorías</h2>
-              <p style={{ color: '#c8d3d9' }} className="text-sm">
+
+        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+
+          {/* Categorías */}
+          <Link to="/dashboard/categories" style={{ textDecoration: 'none', flex: '1 1 300px' }}>
+            <div style={{
+              backgroundColor: '#0a1f2e',
+              border: '1px solid #1a3a50',
+              borderRadius: '16px', padding: '32px',
+              cursor: 'pointer', transition: 'border-color 0.2s'
+            }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#41d1f3'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#1a3a50'}>
+              <div style={{
+                width: '48px', height: '48px',
+                backgroundColor: '#112e40',
+                borderRadius: '12px',
+                display: 'flex', alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '22px', marginBottom: '16px'
+              }}>
+                🗂️
+              </div>
+              <h2 style={{ color: '#41d1f3', fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+                Categorías
+              </h2>
+              <p style={{ color: '#7a9aaa', fontSize: '13px', lineHeight: '1.5' }}>
                 Crear, editar y eliminar categorías de herramientas IA.
               </p>
             </div>
           </Link>
-          <Link to="/dashboard/tools">
-            <div style={{ backgroundColor: '#025273' }}
-              className="rounded-xl p-8 shadow-md hover:border-[#41d1f3] border border-transparent transition cursor-pointer">
-              <h2 style={{ color: '#41d1f3' }} className="text-xl font-bold mb-2">Herramientas</h2>
-              <p style={{ color: '#c8d3d9' }} className="text-sm">
+
+          {/* Herramientas */}
+          <Link to="/dashboard/tools" style={{ textDecoration: 'none', flex: '1 1 300px' }}>
+            <div style={{
+              backgroundColor: '#0a1f2e',
+              border: '1px solid #1a3a50',
+              borderRadius: '16px', padding: '32px',
+              cursor: 'pointer', transition: 'border-color 0.2s'
+            }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#41d1f3'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#1a3a50'}>
+              <div style={{
+                width: '48px', height: '48px',
+                backgroundColor: '#112e40',
+                borderRadius: '12px',
+                display: 'flex', alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '22px', marginBottom: '16px'
+              }}>
+                🛠️
+              </div>
+              <h2 style={{ color: '#41d1f3', fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+                Herramientas
+              </h2>
+              <p style={{ color: '#7a9aaa', fontSize: '13px', lineHeight: '1.5' }}>
                 Agregar, editar y eliminar herramientas de inteligencia artificial.
               </p>
             </div>
           </Link>
+
         </div>
       </div>
     </div>

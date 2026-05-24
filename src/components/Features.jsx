@@ -1,15 +1,11 @@
 // Componente de características para la página de inicio
 export function Features() {
   return (
-    <section style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {/* Lado oscuro */}
+    <section className="features-section" style={{ display: 'flex', flexWrap: 'wrap' }}>
       <div style={{
-        flex: '1 1 50%',
-        backgroundColor: '#025273',
-        padding: '60px 40px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        flex: '1 1 50%', backgroundColor: '#025273',
+        padding: '60px 40px', display: 'flex',
+        alignItems: 'center', justifyContent: 'center'
       }}>
         <div style={{ maxWidth: '400px' }}>
           <h2 style={{ color: '#41d1f3', fontSize: '28px', fontWeight: 'bold', marginBottom: '16px' }}>
@@ -21,25 +17,18 @@ export function Features() {
             lo que necesitas.
           </p>
           <a href="#herramientas" style={{
-            display: 'inline-block',
-            backgroundColor: '#41d1f3', color: '#112e40',
-            padding: '10px 24px', borderRadius: '8px',
-            fontWeight: '700', fontSize: '14px',
-            textDecoration: 'none'
+            display: 'inline-block', backgroundColor: '#41d1f3',
+            color: '#112e40', padding: '10px 24px', borderRadius: '8px',
+            fontWeight: '700', fontSize: '14px', textDecoration: 'none'
           }}>
             Ver herramientas
           </a>
         </div>
       </div>
-
-      {/* Lado turquesa */}
       <div style={{
-        flex: '1 1 50%',
-        backgroundColor: '#41d1f3',
-        padding: '60px 40px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        flex: '1 1 50%', backgroundColor: '#41d1f3',
+        padding: '60px 40px', display: 'flex',
+        alignItems: 'center', justifyContent: 'center'
       }}>
         <div style={{ maxWidth: '400px' }}>
           <h2 style={{ color: '#112e40', fontSize: '28px', fontWeight: 'bold', marginBottom: '20px' }}>

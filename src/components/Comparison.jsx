@@ -33,7 +33,7 @@ const plans = [
     ]
   },
   {
-    name: 'Admin Ai',
+    name: 'Admin',
     backgroundColor: '#025273',
     titleColor: '#41d1f3',
     textColor: '#c8d3d9',
@@ -59,59 +59,40 @@ export function Comparison() {
       }}>
         Planes y accesos
       </h2>
-
       <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '20px',
-        flexWrap: 'wrap',
-        maxWidth: '900px',
-        margin: '0 auto'
+        display: 'flex', justifyContent: 'center',
+        alignItems: 'center', gap: '20px',
+        flexWrap: 'wrap', maxWidth: '900px', margin: '0 auto'
       }}>
         {plans.map(plan => (
-          <div key={plan.name} style={{
+          <div key={plan.name} className="comparison-card" style={{
             backgroundColor: plan.backgroundColor,
-            borderRadius: '16px',
-            padding: '32px 28px',
+            borderRadius: '16px', padding: '32px 28px',
             width: plan.featured ? '260px' : '230px',
             transform: plan.featured ? 'scale(1.05)' : 'scale(1)',
             boxShadow: plan.featured
               ? '0 8px 30px rgba(65,209,243,0.3)'
-              : '0 4px 12px rgba(0,0,0,0.2)',
-            transition: 'transform 0.2s'
+              : '0 4px 12px rgba(0,0,0,0.2)'
           }}>
-            {/* Nombre del plan */}
             <h3 style={{
-              color: plan.titleColor,
-              fontSize: '20px',
-              fontWeight: 'bold',
-              textAlign: 'center',
-              marginBottom: '24px',
-              paddingBottom: '16px',
+              color: plan.titleColor, fontSize: '20px', fontWeight: 'bold',
+              textAlign: 'center', marginBottom: '24px', paddingBottom: '16px',
               borderBottom: `1px solid ${plan.featured ? '#112e40' : '#41d1f3'}`
             }}>
               {plan.name}
             </h3>
-
-            {/* Features */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               {plan.features.map(f => (
-                <div key={f.label} style={{
-                  display: 'flex', alignItems: 'center', gap: '10px'
-                }}>
+                <div key={f.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <span style={{
                     color: f.available ? plan.checkColor : plan.xColor,
-                    fontSize: '16px',
-                    fontWeight: 'bold',
-                    flexShrink: 0,
-                    width: '16px'
+                    fontSize: '16px', fontWeight: 'bold',
+                    flexShrink: 0, width: '16px'
                   }}>
                     {f.available ? '✓' : '✗'}
                   </span>
                   <span style={{
-                    color: plan.textColor,
-                    fontSize: '13px',
+                    color: plan.textColor, fontSize: '13px',
                     opacity: f.available ? 1 : 0.6
                   }}>
                     {f.label}

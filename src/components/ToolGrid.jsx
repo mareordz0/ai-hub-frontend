@@ -45,12 +45,7 @@ export function ToolGrid({ selectedCategory }) {
   return (
     <div>
       {/* Grid con estilos inline */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '24px',
-        width: '100%'
-      }}>
+      <div className="tools-grid">
         {tools.map(tool => (
           <ToolCard key={tool.id} tool={tool} />
         ))}
